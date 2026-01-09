@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escala Comunicação Boa Vista</title>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
     <style>
+        /* 1. VARIÁVEIS DE CORES E TEMAS (Centralização de estilos) */
         :root { 
             --primary: #002e5d; 
             --secondary: #6f42c1;
@@ -18,17 +20,19 @@
             --success: #2ecc71;
         }
 
-        /* MODO NOTURNO OTIMIZADO */
+        /* 2. MODO NOTURNO (Substituição das variáveis de cor) */
         body.dark-mode {
-            --bg: #0f172a;           /* Azul marinho profundo para menor cansaço visual */
-            --white: #1e293b;        /* Cards em tom cinza-azulado */
-            --border: #334155;       /* Bordas mais nítidas no escuro */
-            --text: #f1f5f9;         /* Texto principal quase branco */
-            --input-bg: #0f172a;     /* Inputs mais profundos */
+            --bg: #0f172a;
+            --white: #1e293b;
+            --border: #334155;
+            --text: #f1f5f9;
+            --input-bg: #0f172a;
         }
 
+        /* 3. ESTILOS GERAIS E LAYOUT */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); padding: 8px; margin: 0; transition: background 0.3s; }
         
+        /* Cabeçalho principal com degradê */
         .header-app { 
             position: relative;
             text-align: center; padding: 30px 10px; 
@@ -38,9 +42,9 @@
         .logo-header { width: 140px; margin-bottom: 10px; filter: brightness(0) invert(1); }
         .by-header { font-size: 0.7em; opacity: 0.8; margin-top: 5px; font-weight: 300; letter-spacing: 1px; text-transform: lowercase; }
 
-        /* Ajuste de contraste para o "by" no modo escuro */
         body.dark-mode .by-header { color: #cbd5e1; opacity: 1; }
 
+        /* Controles flutuantes (DarkMode e Redes Sociais) */
         .side-controls {
             position: absolute; top: 15px; right: 15px;
             display: flex; flex-direction: column; gap: 8px;
@@ -57,6 +61,7 @@
         }
         .btn-control:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
 
+        /* Container do formulário */
         .container { max-width: 900px; margin: 0 auto; background: var(--white); padding: 15px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .section-title { font-weight: 700; color: var(--primary); margin: 20px 0 10px 0; border-left: 4px solid var(--primary); padding-left: 10px; font-size: 0.85em; text-transform: uppercase; }
         body.dark-mode .section-title { color: #60a5fa; border-color: #60a5fa; }
@@ -67,7 +72,7 @@
 
         input, select { width: 100%; padding: 10px; border: 2px solid var(--border); border-radius: 10px; box-sizing: border-box; font-size: 0.9em; background: var(--input-bg); color: var(--text); }
 
-        /* Legenda Otimizada */
+        /* 4. COMPONENTES DE GESTÃO DE MEMBROS */
         .legenda-dispo { 
             background: #fffbe6; border: 1px solid #ffe58f; padding: 10px; 
             border-radius: 10px; margin-bottom: 15px; font-size: 0.75em; color: #856404;
@@ -87,6 +92,7 @@
         .membro-info { display: flex; flex-direction: column; gap: 5px; }
         .membro-nome { font-weight: bold; font-size: 0.9em; }
         
+        /* Botões de dias (D, S, T, Q...) */
         .mini-dias { display: flex; gap: 4px; }
         .mini-dia-btn { 
             width: 24px; height: 24px; font-size: 0.6em; border-radius: 5px; 
@@ -96,9 +102,9 @@
         .mini-dia-btn.active { background: var(--success); color: white; border-color: var(--success); }
         .mini-dia-btn.inactive { background: #f8d7da; color: #721c24; border-color: #f5c6cb; text-decoration: line-through; opacity: 0.6; }
         
-        /* Contraste da indisponibilidade no escuro */
         body.dark-mode .mini-dia-btn.inactive { background: #451a1a; color: #f87171; border-color: #7f1d1d; opacity: 1; }
 
+        /* 5. CONFIGURAÇÕES DE FREQUÊNCIA (CARDS DOS DIAS) */
         .weekdays { display: flex; justify-content: space-between; gap: 4px; margin: 15px 0; width: 100%; }
         .day-card { 
             flex: 1; min-width: 0; background: var(--white); padding: 8px 2px; border: 2px solid var(--border); 
@@ -115,33 +121,53 @@
 
         .especial-input-div { display: none; border-top: 1px solid #eee; margin-top: 5px; padding-top: 5px; }
 
+        /* 6. BOTÕES DE AÇÃO */
         .actions { margin: 25px 0; display: flex; gap: 8px; flex-wrap: wrap; }
         .actions button { flex: 1; height: 45px; border-radius: 10px; font-weight: bold; cursor: pointer; border: none; font-size: 0.85em; transition: 0.2s; }
         .btn-generate { background: var(--primary); color: white; }
         .btn-download { background: var(--secondary); color: white; }
-        .btn-clear { background: #f1f2f6; color: #a4b0be; }
-        body.dark-mode .btn-clear { background: #334155; color: #94a3b8; }
+        
+        .btn-clear { 
+            background: #f8f9fa; 
+            color: var(--danger); 
+            border: 1px solid #eee !important;
+        }
+        .btn-clear:hover { 
+            background: #fff5f5;
+            border-color: var(--danger) !important;
+            transform: translateY(-2px);
+        }
+        body.dark-mode .btn-clear {
+            background: #1e293b;
+            border-color: #334155 !important;
+        }
+        body.dark-mode .btn-clear:hover {
+            background: #451a1a;
+            border-color: var(--danger) !important;
+        }
 
+        /* 7. TABELA DE RESULTADOS */
         #escalaResultado { padding: 25px; background: var(--white); border-radius: 10px; text-align: center; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; text-align: left; }
         th { background: #f8f9fa; color: var(--primary); padding: 12px 8px; border-bottom: 2px solid var(--primary); }
         body.dark-mode th { background: #334155; color: #fff; border-bottom-color: #60a5fa; }
         td { padding: 12px 8px; border-bottom: 1px solid var(--border); }
         body.dark-mode td { color: #f1f5f9; }
-        body.dark-mode td[style*="color:#666"] { color: #94a3b8 !important; }
         
         .btn-icon { background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 4px; opacity: 0.7; }
         body.dark-mode .btn-icon { filter: brightness(1.5); }
         .titulo-escala-gerada { display: none; color: var(--primary); margin: 10px 0; font-size: 1.5em; font-weight: 800; text-transform: uppercase; }
         body.dark-mode .titulo-escala-gerada { color: #fff; }
 
+        /* Badges específicas para o departamento de Louvor */
         .badge-louvor { font-size: 0.75em; font-weight: bold; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; margin-right: 5px; display: inline-block; min-width: 100px; text-align: center; }
         .bg-congregacional { background: #e3f2fd; color: #0d47a1; }
         .bg-especial { background: #f3e5f5; color: #4a148c; }
         body.dark-mode .bg-congregacional { background: #1e3a8a; color: #bfdbfe; }
         body.dark-mode .bg-especial { background: #4c1d95; color: #ddd6fe; }
 
-        .capturando .col-acoes, .capturando .btn-theme-toggle, .capturando .side-controls { display: none !important; }
+        /* Ocultação de elementos durante o "print" da imagem */
+        .capturando .col-acoes, .capturando .btn-theme-toggle, .capturando .side-controls, .capturando .no-capture { display: none !important; }
         .capturando .titulo-escala-gerada { display: block !important; }
         .capturando { width: 600px !important; }
     </style>
@@ -194,7 +220,7 @@
             <div class="legenda-item"><strong>Guia:</strong> Clique nas letras para definir a disponibilidade semanal.</div>
             <div style="display: flex; gap: 15px; margin-top: 5px;">
                 <div class="legenda-item"><span class="mini-dia-btn active">D</span> <span>Disponível</span></div>
-                <div class="legenda-item"><span class="mini-dia-btn inactive">D</span> <span>Indisponível (Não escala)</span></div>
+                <div class="legenda-item"><span class="mini-dia-btn inactive">D</span> <span>Indisponível</span></div>
             </div>
         </div>
 
@@ -205,7 +231,7 @@
         <div class="lista-membros" id="listaMembrosGeral"></div>
 
         <div id="divLouvorEspecial" style="display:none;">
-            <div class="section-title">🌟 Gestão de Equipe (Louvor Especial)</div>
+            <div class="section-title">🌟 Equipe Louvor Especial</div>
             <div class="cadastro-membros">
                 <input type="text" id="novoNomeEsp" placeholder="Nome do voluntário...">
                 <button onclick="adicionarMembro('especial')" style="width: 100px; border-radius: 10px; background: var(--secondary); color: white; border: none; font-weight: bold; cursor: pointer;">+ Add</button>
@@ -220,7 +246,7 @@
     <div class="actions no-capture">
         <button class="btn-generate" onclick="gerarEscala()">🚀 Gerar Escala</button>
         <button class="btn-download" onclick="baixarEscala()">📥 Baixar Escala</button>
-        <button class="btn-clear" onclick="limparTudo()">Limpar Tudo</button>
+        <button class="btn-clear" onclick="limparTudo()">⚠️ Limpar Tudo</button>
     </div>
 
     <div id="escalaResultado">
@@ -240,10 +266,14 @@
 </div>
 
 <script>
+    /* ============================================================
+       1. CONFIGURAÇÕES INICIAIS E VARIÁVEIS GLOBAIS
+       ============================================================ */
     const diasSemanaNome = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
     let membrosGeral = JSON.parse(localStorage.getItem('membros_geral')) || [];
     let membrosEspecial = JSON.parse(localStorage.getItem('membros_especial')) || [];
 
+    // Função executada ao abrir a página
     window.onload = () => {
         if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
         const hoje = new Date();
@@ -252,9 +282,10 @@
         renderizarMembros('geral');
         renderizarMembros('especial');
         
+        // Criação dinâmica dos cards de Segunda a Domingo
         const containerDias = document.getElementById('diasSelecao');
         diasSemanaNome.forEach((dia, index) => {
-            const isDefault = [0,3,6].includes(index);
+            const isDefault = [0,3,6].includes(index); // Padrão: Dom, Qua, Sáb marcados
             containerDias.innerHTML += `
                 <div class="day-card ${isDefault ? 'active' : ''}" id="card-${index}" onclick="toggleCard(${index})">
                     <span class="day-name">${dia}</span>
@@ -270,6 +301,9 @@
         });
     };
 
+    /* ============================================================
+       2. FUNÇÕES DE GESTÃO DE MEMBROS (ADD / REMOVE / RENDER)
+       ============================================================ */
     function adicionarMembro(tipo) {
         const idCampo = tipo === 'geral' ? 'novoNome' : 'novoNomeEsp';
         const input = document.getElementById(idCampo);
@@ -313,6 +347,9 @@
         renderizarMembros(tipo);
     }
 
+    /* ============================================================
+       3. PERSISTÊNCIA E CONFIGURAÇÕES DE UI
+       ============================================================ */
     function salvarDados() {
         localStorage.setItem('membros_geral', JSON.stringify(membrosGeral));
         localStorage.setItem('membros_especial', JSON.stringify(membrosEspecial));
@@ -343,31 +380,62 @@
         document.getElementById('dataFim').value = new Date(ano, mes, 0).toISOString().substring(0, 10);
     }
 
+    /* ============================================================
+       4. LÓGICA DE GERAÇÃO DA ESCALA (O CORAÇÃO DO APP)
+       ============================================================ */
     function gerarEscala() {
         if(membrosGeral.length === 0) return alert("Por favor, cadastre voluntários na equipe.");
+        
         const deptoSelect = document.getElementById('tipoEscala');
         const isLouvor = deptoSelect.value === 'Louvor';
         let nomeFinal = deptoSelect.options[deptoSelect.selectedIndex].text;
+        
         if (deptoSelect.value === 'Outros') {
             const outroNome = document.getElementById('outroTipo').value.trim();
             nomeFinal = outroNome ? "✨ " + outroNome : "Outros";
         }
+
         document.getElementById('tituloEscala').innerText = "ESCALA: " + nomeFinal;
         document.getElementById('tituloEscala').style.display = "block";
         const tbody = document.querySelector('#tabelaEscala tbody');
         tbody.innerHTML = "";
+
+        let contagemGeral = {};
+        let contagemEspecial = {};
         let dataAtual = new Date(document.getElementById('dataInicio').value + "T00:00:00");
         const dataFimObj = new Date(document.getElementById('dataFim').value + "T00:00:00");
 
+        // Loop dia a dia pelo período selecionado
         while (dataAtual <= dataFimObj) {
             const diaSemana = dataAtual.getDay();
+            
+            // Se o dia da semana estiver marcado como ativo
             if (document.getElementById(`dia-${diaSemana}`).checked) {
                 const qtdCong = parseInt(document.getElementById(`qtd-${diaSemana}`).value) || 1;
                 const qtdEsp = isLouvor ? (parseInt(document.getElementById(`qtd-esp-${diaSemana}`).value) || 0) : 0;
+
+                // Filtra quem pode trabalhar neste dia
                 let aptosGeral = membrosGeral.filter(m => m.disponivel.includes(diaSemana));
                 let aptosEsp = membrosEspecial.filter(m => m.disponivel.includes(diaSemana));
-                let escolhidosCong = [...aptosGeral].sort(() => Math.random() - 0.5).slice(0, qtdCong).map(m => m.nome);
-                let escolhidosEsp = isLouvor ? [...aptosEsp].sort(() => Math.random() - 0.5).slice(0, qtdEsp).map(m => m.nome) : [];
+
+                // SORTEIO: Prioriza quem trabalhou menos vezes (equilíbrio)
+                let escolhidosCong = aptosGeral
+                    .sort((a, b) => (contagemGeral[a.nome] || 0) - (contagemGeral[b.nome] || 0) || (Math.random() - 0.5))
+                    .slice(0, qtdCong)
+                    .map(m => {
+                        contagemGeral[m.nome] = (contagemGeral[m.nome] || 0) + 1;
+                        return m.nome;
+                    });
+
+                let escolhidosEsp = isLouvor ? aptosEsp
+                    .sort((a, b) => (contagemEspecial[a.nome] || 0) - (contagemEspecial[b.nome] || 0) || (Math.random() - 0.5))
+                    .slice(0, qtdEsp)
+                    .map(m => {
+                        contagemEspecial[m.nome] = (contagemEspecial[m.nome] || 0) + 1;
+                        return m.nome;
+                    }) : [];
+
+                // Criação da linha na tabela
                 const row = document.createElement('tr');
                 row.dataset.isLouvor = isLouvor;
                 row.innerHTML = `
@@ -388,6 +456,9 @@
         }
     }
 
+    /* ============================================================
+       5. FUNÇÕES DE EDIÇÃO E EXPORTAÇÃO
+       ============================================================ */
     function editarLinha(btn) {
         const row = btn.closest('tr');
         const td = row.querySelector('.nomes-td');
@@ -423,7 +494,13 @@
     }
 
     function excluirLinha(btn) { if(confirm("Remover este dia?")) btn.closest('tr').remove(); }
-    function limparTudo() { if(confirm("Isso apagará todos os membros cadastrados e a escala. Deseja continuar?")) { localStorage.clear(); location.reload(); } }
+    
+    function limparTudo() { 
+        if(confirm("Isso apagará todos os membros cadastrados e a escala. Deseja continuar?")) { 
+            localStorage.clear(); 
+            location.reload(); 
+        } 
+    }
 </script>
 </body>
 </html>
