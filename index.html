@@ -684,6 +684,40 @@
             });
         }, 600);
     }
+
+        /* ============================================================
+    6. FUNÇÃO DE LIMPEZA
+    ============================================================ */
+    function limparTudo() {
+        if (confirm("Tem certeza que deseja apagar TODOS os voluntários e a escala gerada? Esta ação não pode ser desfeita.")) {
+            
+            // 1. Limpa o LocalStorage (Memória do Navegador)
+            localStorage.removeItem('membros_geral');
+            localStorage.removeItem('membros_especial');
+            localStorage.removeItem('escala_salva_html');
+            localStorage.removeItem('escala_titulo_salvo');
+            // Opcional: localStorage.clear(); // Limpa absolutamente tudo, incluindo o tema
+
+            // 2. Reseta as variáveis na memória do script
+            membrosGeral = [];
+            membrosEspecial = [];
+
+            // 3. Limpa a interface visual
+            document.querySelector('#tabelaEscala tbody').innerHTML = "";
+            document.getElementById('tituloEscala').style.display = "none";
+            document.getElementById('tituloEscala').innerText = "";
+            
+            // 4. Atualiza as listas de membros exibidas
+            renderizarMembros('geral');
+            renderizarMembros('especial');
+
+            // 5. Feedback visual
+            alert("Todos os dados foram limpos com sucesso!");
+            
+            // Opcional: Recarregar a página para resetar todos os inputs
+            // location.reload();
+        }
+    }
 </script>
 </body>
 </html>
